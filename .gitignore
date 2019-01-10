@@ -1,1 +1,5 @@
+# build directory
 build
+
+# compilation commands
+compile_commands.json
