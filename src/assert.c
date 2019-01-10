@@ -1,6 +1,6 @@
 #include "dryrun.h"
 
-bool assertTrue(const int condition)
+static bool assertTrue(const int condition)
 {
         if (condition) {
                 return true;
@@ -9,7 +9,7 @@ bool assertTrue(const int condition)
         }
 }
 
-bool assertFalse(const int condition)
+static bool assertFalse(const int condition)
 {
         if (condition) {
                 return false;
@@ -18,7 +18,7 @@ bool assertFalse(const int condition)
         }
 }
 
-bool assertCharEquals(const char actual, const char expected)
+static bool assertCharEquals(const char actual, const char expected)
 {
         if (actual == expected) {
                 return true;
@@ -27,7 +27,7 @@ bool assertCharEquals(const char actual, const char expected)
         }
 }
 
-bool assertIntEquals(const int actual, const int expected)
+static bool assertIntEquals(const int actual, const int expected)
 {
         if (actual == expected) {
                 return true;
@@ -36,7 +36,7 @@ bool assertIntEquals(const int actual, const int expected)
         }
 }
 
-bool assertLongEquals(const long actual, const long expected)
+static bool assertLongEquals(const long actual, const long expected)
 {
         if (actual == expected) {
                 return true;
@@ -45,7 +45,7 @@ bool assertLongEquals(const long actual, const long expected)
         }
 }
 
-bool assertFloatEquals(const float actual, const float expected)
+static bool assertFloatEquals(const float actual, const float expected)
 {
         if (actual == expected) {
                 return true;
@@ -54,8 +54,8 @@ bool assertFloatEquals(const float actual, const float expected)
         }
 }
 
-bool assertFloatEqualsEpsilon(const float actual, const float expected,
-                              const float epsilon)
+static bool assertFloatEqualsEpsilon(const float actual, const float expected,
+                                     const float epsilon)
 {
         if (fabsf(actual - expected) < epsilon) {
                 return true;
@@ -64,7 +64,7 @@ bool assertFloatEqualsEpsilon(const float actual, const float expected,
         }
 }
 
-bool assertDoubleEquals(const int actual, const int expected)
+static bool assertDoubleEquals(const int actual, const int expected)
 {
         if (actual == expected) {
                 return true;
@@ -73,8 +73,9 @@ bool assertDoubleEquals(const int actual, const int expected)
         }
 }
 
-bool assertDoubleEqualsEpsilon(const double actual, const double expected,
-                               const double epsilon)
+static bool assertDoubleEqualsEpsilon(const double actual,
+                                      const double expected,
+                                      const double epsilon)
 {
         if (fabs(actual - expected) < epsilon) {
                 return true;
@@ -83,8 +84,8 @@ bool assertDoubleEqualsEpsilon(const double actual, const double expected,
         }
 }
 
-bool assertFloatComplexEquals(const float complex actual,
-                              const float complex expected)
+static bool assertFloatComplexEquals(const float complex actual,
+                                     const float complex expected)
 {
         if (creal(actual) != creal(expected)) {
                 return false;
@@ -95,8 +96,8 @@ bool assertFloatComplexEquals(const float complex actual,
         return true;
 }
 
-bool assertDoubleComplexEquals(const double complex actual,
-                               const double complex expected)
+static bool assertDoubleComplexEquals(const double complex actual,
+                                      const double complex expected)
 {
         if (creal(actual) != creal(expected)) {
                 return false;
@@ -107,8 +108,8 @@ bool assertDoubleComplexEquals(const double complex actual,
         return true;
 }
 
-bool assertIntArrayEquals(const int *actual, const int *expected,
-                          const int length)
+static bool assertIntArrayEquals(const int *actual, const int *expected,
+                                 const int length)
 {
         for (int i = 0; i < length; i++) {
                 if (!assertIntEquals(actual[i], expected[i])) {
@@ -118,8 +119,8 @@ bool assertIntArrayEquals(const int *actual, const int *expected,
         return true;
 }
 
-bool assertLongArrayEquals(const long *actual, const long *expected,
-                           const int length)
+static bool assertLongArrayEquals(const long *actual, const long *expected,
+                                  const int length)
 {
         for (int i = 0; i < length; i++) {
                 if (!assertLongEquals(actual[i], expected[i])) {
@@ -129,8 +130,8 @@ bool assertLongArrayEquals(const long *actual, const long *expected,
         return true;
 }
 
-bool assertFloatArrayEquals(const float *actual, const float *expected,
-                            const int length)
+static bool assertFloatArrayEquals(const float *actual, const float *expected,
+                                   const int length)
 {
         for (int i = 0; i < length; i++) {
                 if (!assertFloatEquals(actual[i], expected[i])) {
@@ -140,8 +141,8 @@ bool assertFloatArrayEquals(const float *actual, const float *expected,
         return true;
 }
 
-bool assertDoubleArrayEquals(const double *actual, const float *expected,
-                             const int length)
+static bool assertDoubleArrayEquals(const double *actual, const float *expected,
+                                    const int length)
 {
         for (int i = 0; i < length; i++) {
                 if (!assertDoubleEquals(actual[i], expected[i])) {
